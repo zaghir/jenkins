@@ -11,7 +11,7 @@
 
 // DECLARATIVE 
 pipeline {
-	agent any  // agent where the build is going to run  , using docker image ,running inside docker image  , pipeline run alwyse with stages 
+	agent any  // agent where the build is going to run  , using docker image ,running inside docker image  , pipeline run always with stages 
 	stages {
 		stage ('Build') {
 			steps {
@@ -30,8 +30,8 @@ pipeline {
 		}
 	} 
 	post {
-		alwyse {
-			echo "Im awesome. I run alwyse"
+		always {
+			echo "Im awesome. I run always"
 		}
 		success {
 			echo "I run when you are  successful "
