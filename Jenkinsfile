@@ -14,6 +14,11 @@ pipeline {
 	// agent where the build is going to run  , using docker image ,running inside docker image  , pipeline run alwyse with stages 
 	agent any  
 	
+	environment {
+		dockerHome = tool 'myDocker'
+		mavenHome = tool 'myMaven'
+		PATH = "$dockerHome/bin:$mavenHome/bin:$PATH"
+	}
 	// agent docker ---- here we use docker agent with maven image => maven:3.6.3  , look at Dockerfile then execute process
 	// agent { docker { image 'maven:3.6.3'}}
 
@@ -23,7 +28,10 @@ pipeline {
 	stages {
 		stage ('Build') {
 			steps {
-				// sh 'mvn --version'
+				sh 'mvn --version'
+				sh 'docker version'
+				
+				echo "PATH --->  $PATH"
 
 				// for nodeJs
 				// sh 'mvn --version'
