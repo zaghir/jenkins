@@ -50,8 +50,8 @@ pipeline {
 		}
 	} 
 	post {
-		alwyse {
-			echo "Im awesome. I run alwyse"
+		always {
+			echo "Im awesome. I run always"
 		}
 		success {
 			echo "I run when you are  successful "
