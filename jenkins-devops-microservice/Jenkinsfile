@@ -11,11 +11,31 @@
 
 // DECLARATIVE 
 pipeline {
-	agent any  // agent where the build is going to run  , using docker image ,running inside docker image  , pipeline run always with stages 
+	// agent where the build is going to run  , using docker image ,running inside docker image  , pipeline run alwyse with stages 
+	agent any  
+	
+	// agent docker ---- here we use docker agent with maven image => maven:3.6.3  , look at Dockerfile then execute process
+	// agent { docker { image 'maven:3.6.3'}}
+
+    // agent docker ---- here we use docker agent with nodeJs  image => maven:3.6.3  , look at Dockerfile then execute process
+	// agent { docker { image 'node:13.8'}}
+
 	stages {
 		stage ('Build') {
 			steps {
+				// sh 'mvn --version'
+
+				// for nodeJs
+				// sh 'mvn --version'
 				echo "Build"
+				echo "PATH - $PATH"
+				echo "Information from  Pipeline Syntax -> Global Variable Reference "
+				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
+				echo "BUILD_ID - $env.BUILD_ID"
+				echo "JOB_NAME - $env.JOB_NAME"
+				echo "BUILD_TAG - $env.BUILD_TAG"
+				echo "BUILD_URL - $env.BUILD_URL"
+				echo "TAG_DATE - $env.TAG_DATE"
 			}
 		}
 		stage ('Test') {
@@ -30,8 +50,8 @@ pipeline {
 		}
 	} 
 	post {
-		always {
-			echo "Im awesome. I run always"
+		alwyse {
+			echo "Im awesome. I run alwyse"
 		}
 		success {
 			echo "I run when you are  successful "
