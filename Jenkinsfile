@@ -26,7 +26,7 @@ pipeline {
 	// agent { docker { image 'node:13.8'}}
 
 	stages {
-		stage ('Build') {
+		stage ('Checkout') {
 			steps {
 				sh 'mvn --version'
 				sh 'docker version'
@@ -46,14 +46,22 @@ pipeline {
 				echo "TAG_DATE - $env.TAG_DATE"
 			}
 		}
+		stage ('Compile') {
+			steps {
+				echo " Compile ####"
+				sh "mvn clean compile"
+			}
+		}
 		stage ('Test') {
 			steps {
-				echo "Test"
+				echo " Test ####"
+				sh "mvn test"
 			}
 		}
 		stage ('Integration Test') {
 			steps {
-				echo "Integration Test"
+				echo "Integration Test ####"
+				sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
 	} 
